@@ -1,12 +1,20 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import SignUp from "./page/SignUp";
+import SignIn from "./page/SignIn";
+import Groups from "./page/Groups";
+import Main from "./page/Main";
+import NewGroup from "./page/NewGroup";
 
 function App() {
   return (
-    <div>
-      <header>
-        <p>메인 홈페이지</p>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="groups/*" element={<Groups />}>
+        <Route path="new" element={<NewGroup />} />
+      </Route>
+      <Route path="signUp" element={<SignUp />} />
+      <Route path="signIn" element={<SignIn />} />
+    </Routes>
   );
 }
 
