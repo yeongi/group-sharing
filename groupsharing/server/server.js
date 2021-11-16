@@ -6,6 +6,7 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 const static = require('serve-static');
 app.use(cookieParser());
 //??
@@ -14,6 +15,12 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
+// 세션 설정
+app.use(expressSession({
+  secret:'my key',
+  resave:true,
+  saveUninitialized:true
+  }));
 // body-parser를 이용해 application/x-www-form-urlencoded 형식 파싱
 app.use(bodyParser.urlencoded({ extended: false }));
 // body-parser를 이용해 application/json 형식 파싱
@@ -23,6 +30,7 @@ app.use(bodyParser.json());
 router.route('/login').post(function(req,res) {
   //로그인 성공이라고 가정
   res.cookie('id',req.body.id);
+  req.session.id = 'ccc';
   res.redirect('.');
 });
 
@@ -30,6 +38,7 @@ router.route('/login').get(function(req,res) {
   res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
   res.write('<h1>Express 당신이 보낸 쿠키에 저장된 id 값입니다</h1>');
   res.write('<div><p>id : ' + req.cookies.id + '</p></div>');
+  res.write('<div><p>id : ' + req.session.id + '</p></div>');
   res.end();
 });
 
