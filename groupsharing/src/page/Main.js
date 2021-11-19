@@ -29,10 +29,10 @@ const Main = () => {
               ) : (
                 <Link to="signUp">로그인 하기</Link>
               )}
+              {user.isLoggedIn && (
+                <input type="button" value="로그아웃" onClick={logoutHandler} />
+              )}
             </ul>
-            {user.isLoggedIn ?? (
-              <input type="button" value="로그아웃" onClick={logoutHandler} />
-            )}
           </nav>
         </header>
       </div>
