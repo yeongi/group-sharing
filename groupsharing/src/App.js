@@ -4,6 +4,7 @@ import SignIn from "./page/SignIn";
 import Groups from "./page/Groups";
 import Main from "./page/Main";
 import NewGroup from "./page/NewGroup";
+import Group from "./page/Group";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="groups/*" element={<Groups />}>
         <Route path="new" element={<NewGroup />} />
       </Route>
+      <Route path="group" element={<Group />} />
       <Route path="signUp" element={<SignUp />} />
       <Route path="signIn" element={<SignIn />} />
     </Routes>
