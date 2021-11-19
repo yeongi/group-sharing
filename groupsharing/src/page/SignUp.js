@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { loginPost, logOutPost } from "../lib/axios";
+import UserCtx from "../store/userContext";
 
 const SignUp = () => {
   const [id, setId] = useState("");
+
+  const user = useContext(UserCtx);
+  const navigate = useNavigate();
 
   const idChangeHandler = (e) => {
     setId(e.target.value);
@@ -11,12 +15,9 @@ const SignUp = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
+    user.onLogIn();
+    navigate("/");
     loginPost(id);
-  };
-
-  const logoutHandler = (e) => {
-    e.preventDefault();
-    logOutPost();
   };
 
   return (
@@ -29,7 +30,7 @@ const SignUp = () => {
         <input type="text" name="pw" />
         <input type="submit" value="제출" />
       </form>
-      <input type="button" value="로그아웃" onClick={logoutHandler} />
+
       <Link to="/signIn">회원가입 하기</Link>
     </>
   );
