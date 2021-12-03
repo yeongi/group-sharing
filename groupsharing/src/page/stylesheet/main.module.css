@@ -1,15 +1,15 @@
 .wrapper {
-  width: 100%;
+  width: 90%;
   height: 100%;
+  margin: 0 auto;
   text-align: center;
-  background-color: beige;
 }
 
 .nav-wrapper {
   padding: 20px;
   width: 100%;
   height: auto;
-  background-color: wheat;
+  background-color: rgba(250, 221, 167, 0.308);
 }
 
 .nav-wrapper section {
@@ -31,4 +31,10 @@
   border-radius: 30px;
   margin: 30px;
   background-color: rgb(231, 231, 231);
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
 }
