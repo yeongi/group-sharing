@@ -53,7 +53,9 @@ const SignUp = () => {
             <Button variant="outline">
               <Link to="/signIn">회원가입 하기</Link>
             </Button>
-            <Button variant="contained">제출</Button>
+            <Button variant="contained" onClick={loginHandler}>
+              제출
+            </Button>
           </form>
         </div>
       </Body>
