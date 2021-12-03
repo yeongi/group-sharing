@@ -1,13 +1,16 @@
 .form-wrapper {
-  width: 100%;
+  width: 60%;
+  padding: 2rem;
   height: 100%;
+  margin: 0 auto;
   background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
 }
 
 .form-wrapper .item {
   height: 80px;
   padding: 10px;
   margin: 10px;
-  border: black 1px solid;
   border-radius: 20px;
 }

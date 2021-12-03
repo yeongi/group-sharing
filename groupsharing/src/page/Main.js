@@ -19,7 +19,7 @@ const Main = () => {
   return (
     <>
       <Body message="메인 페이지">
-        <nav>
+        <section>
           <div className={classes["nav-item"]}>
             <h1>그룹을 검색하세요.</h1>
             <Link to="groups">그룹 찾기</Link>
@@ -39,7 +39,7 @@ const Main = () => {
               <input type="button" value="로그아웃" onClick={logoutHandler} />
             )}
           </div>
-        </nav>
+        </section>
       </Body>
     </>
   );
