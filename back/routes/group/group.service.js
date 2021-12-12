@@ -102,7 +102,7 @@ module.exports = {
     try {
       const { grp_num } = userInfo;
       const conn = await pool.getConnection();
-      const query = "SELECT * FROM group_sharing WHERE grp_num = ?;";
+      const query = "SELECT * FROM (SELECT * FROM group_sharing WHERE grp_num = ? ) t INNER JOIN `group` ON `group`.grp_num = t.grp_num2;";
       const [result] = await conn.query(query, [grp_num]);
       conn.release();
       return result;
