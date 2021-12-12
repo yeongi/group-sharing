@@ -54,7 +54,7 @@ module.exports = {
   getGroupByUserNum: async (user_num) => {
     try {
       const conn = await pool.getConnection();
-      const query = "select * from `group_user` where user_num = ?;";
+      const query = "SELECT * FROM `group` WHERE grp_num IN (select grp_num from `group_user` where user_num = ?);";
       const [result] = await conn.query(query, [user_num]);
       conn.release();
       return result;
