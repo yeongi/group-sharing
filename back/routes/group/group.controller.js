@@ -63,11 +63,10 @@ router.get("/groupSharing/grp_num/:grp_num", async (req, res) => {
 });
 
 //그룹 번호로 그룹간 공유하기
-router.post("/startGroupSharing/grp_num1/:grp_num1/grp_num2/:grp_num2", async (req, res) => {
+router.post("/startGroupSharing", async (req, res) => {
   try {
-    //const { grp_num1,grp_num2 } = req.params;
-    //const { sharing_start_date,sharing_finish_date} = req.body;
-    const result = await groupService.startGroupSharing(req.params,req.body);
+    //const { grp_num1,grp_num2,sharing_start_date,sharing_finish_date} = req.body;
+    const result = await groupService.startGroupSharing(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
