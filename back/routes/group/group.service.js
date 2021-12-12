@@ -4,7 +4,7 @@ module.exports = {
   getAllGroups: async () => {
     try {
       const conn = await pool.getConnection();
-      const query = "SELECT * FROM group;";
+      const query = "SELECT * FROM `group`;";
       const [result] = await conn.query(query);
       conn.release();
       return result;

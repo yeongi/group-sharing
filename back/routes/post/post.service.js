@@ -23,6 +23,17 @@ module.exports = {
       throw error;
     }
   },
+  getPublicPostByGrpNum: async (grp_num) => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM post WHERE open_type = 'public' AND grp_num = ?;";
+      const [result] = await conn.query(query,[grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
   getPostByPostNum: async (userInfo) => {
     try {
       const { post_num } = userInfo;

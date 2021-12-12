@@ -11,6 +11,7 @@ router.post("/signUp", async (req, res) => {
     result = await interestService.addInterestUser(req.body);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ status: 500, message: error });
   }
 });

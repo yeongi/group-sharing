@@ -26,6 +26,18 @@ router.get("/public", async (req, res) => {
   }
 });
 
+//그룹 번호로 공개 게시글만 전부 조회
+router.get("/public/grpNum/:grp_num", async (req, res) => {
+  try {
+    const { grp_num } = req.params;
+    const result = await postService.getPublicPostByGrpNum(grp_num);
+    console.log(result);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
 //게시글 번호로 글 하나 가져오기 (권한 무시하고 무조건 가져옴)
 router.get("/post_num/:post_num", async (req, res) => {
   try {
