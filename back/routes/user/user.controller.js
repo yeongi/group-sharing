@@ -31,4 +31,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//그룹 번호로 그룹간 공유하기
+router.post("/grp/:user_num", async (req, res) => {
+  try {
+    //const { user_num } = req.body;
+    const result = await UserService.getGroupByUserNum(req.body);
+    console.log(result);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
 module.exports = router;
