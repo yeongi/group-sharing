@@ -24,6 +24,18 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  getUserInterests: async (userInfo) => {
+    try {
+      const { user_num } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM interest WHERE user_num = ?;";
+      const [result] = await conn.query(query,[user_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 };
 
