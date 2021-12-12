@@ -44,8 +44,8 @@ const PostAPI = {
     });
   },
 
-  getProtectedPost: (grp_num) => {
-    return fetch(`${CREATE_API}/shareProtected/${grp_num}`, {
+  getProtectedPost: (cur) => {
+    return fetch(`${CREATE_API}/shareProtected/${cur}`, {
       method: "get",
       headers: {
         "Content-type": "application/json",

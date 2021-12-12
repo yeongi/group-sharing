@@ -77,8 +77,8 @@ const Group = (props) => {
   );
 
   const getShareGrpPostList = useCallback(
-    async (grp_num) => {
-      const result = await PostAPI.getProtectedPost(grp_num);
+    async (shr) => {
+      const result = await PostAPI.getProtectedPost(shr);
       const data = await result.json();
       console.log(data);
       setPostList(data.data);
@@ -173,7 +173,6 @@ const Group = (props) => {
                         size="large"
                         onClick={(e) => {
                           getShareGrpPostList(grp.grp_num);
-                          setGrp(grp);
                         }}
                       >
                         {grp.grp_name}
