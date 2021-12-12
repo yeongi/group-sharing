@@ -23,5 +23,6 @@
   width: 400px;
   height: 700px;
   padding: 20px;
+  overflow: scroll;
   border: 1px black solid;
 }

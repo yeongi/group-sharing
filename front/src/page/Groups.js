@@ -48,15 +48,11 @@ const Groups = () => {
               {!isLoading &&
                 grpList.map((g) => {
                   return (
-                    <div
-                      key={g.grp_num}
-                      onClick={(e) => {
-                        navigator(`${g.grp_num}`);
-                      }}
-                    >
+                    <div key={g.grp_num}>
                       <p>그룹명 : {g.grp_name}</p>
                       <p>그룹번호 : {g.grp_num}</p>
                       <p>관심사 번호 : {g.interest_num}</p>
+                      <Link to={`${g.grp_num}`}>게시물 보기</Link>
                       <hr />
                     </div>
                   );

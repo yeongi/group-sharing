@@ -38,3 +38,28 @@
   justify-content: space-evenly;
   padding: 20px;
 }
+
+.group-wrapper {
+  display: flex;
+  margin: 0 auto;
+  width: 1000px;
+  height: 800px;
+  gap: 10px;
+}
+
+.group-wrapper .share {
+  border: 1px solid black;
+  width: 300px;
+  text-align: center;
+}
+
+.group-wrapper .allpost {
+  border: 1px solid black;
+  text-align: center;
+  width: 300px;
+}
+
+.group-wrapper .post {
+  border: 1px solid black;
+  width: 600px;
+}
