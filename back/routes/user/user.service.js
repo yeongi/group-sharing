@@ -2,51 +2,52 @@ const pool = require("../../config/dbConfig");
 
 module.exports = {
   insertUser: async (userInfo) => {
-    // try{
-    //     const {
-    //         user_nm,
-    //         user_desc,
-    //         user_login_id,
-    //         user_login_pw
-    //     } = userInfo;
-    //     const conn = await pool.getConnection();
-    //     const query =
-    //     `INSERT INTO t_user
-    //     (
-    //         user_id,
-    //         user_nm,
-    //         user_desc,
-    //         user_login_id,
-    //         user_login_pw,
-    //         created_at,
-    //         modified_at
-    //         ) VALUES (
-    //             ?,
-    //             ?,
-    //             ?,
-    //             ?,
-    //             ?,
-    //             UNIX_TIMESTAMP(),
-    //             UNIX_TIMESTAMP()
-    //         );`;
-    //     const [{affectRows:result}] = await conn.query(query,[v4(), user_nm, user_desc, user_login_id,user_login_pw]);
-    //     conn.release();
-    //     return result;
-    // } catch(error){
-    //     console.log(error);
-    //      throw error;
-    // }
+    try {
+      const { name, id, password } = userInfo;
+      const conn = await pool.getConnection();
+      const query = `INSERT INTO user (name, id, password) VALUES (?,?,?);`;
+      const [{ affectRows: result }] = await conn.query(query, [
+        name,
+        id,
+        password,
+      ]);
+      conn.release();
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   },
   getUserList: async () => {
-    // try{
-    //     const conn = await pool.getConnection();
-    //     const query = "SELECT * FROM t_user;";
-    //     const [result] = await conn.query(query);
-    //     conn.release();
-    //     return result;
-    // } catch(error){
-    //      throw error;
-    // }
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM user;";
+      const [result] = await conn.query(query);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+  checkUser: async (userInfo) => {
+    try {
+      console.log(userInfo);
+      const { id, password } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "select * from user where id = ?;";
+      // const [{ affectRows: result }] = await conn.query(query, [id]);
+      const [result] = await conn.query(query, [id]);
+      conn.release();
+      const { password: my_pw } = result[0];
+      if (my_pw === password) {
+        return result[0];
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   },
   updateUser: (userInfo) => {},
   deleteUser: (userInfo) => {},
