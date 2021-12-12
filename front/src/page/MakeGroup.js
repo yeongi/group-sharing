@@ -13,7 +13,7 @@ const MakeGroup = () => {
 
   const postMakeGrp = async (e) => {
     e.preventDefault();
-    const result = await GrpApi.postMyGrp({
+    const result = await GrpApi.postGrp({
       interest_num: intr,
       grp_name: name,
       grp_leader: userctx.user.num,
