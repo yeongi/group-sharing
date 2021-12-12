@@ -36,7 +36,6 @@ const PostAPI = {
     });
   },
   getGrpNumPost: (grp_num) => {
-    //name, id, password
     return fetch(`${CREATE_API}/grp_num/${grp_num}`, {
       method: "get",
       headers: {
@@ -44,15 +43,16 @@ const PostAPI = {
       },
     });
   },
+
   getProtectedPost: (grp_num) => {
-    //name, id, password
-    return fetch(`${CREATE_API}/grp_num/${grp_num}`, {
+    return fetch(`${CREATE_API}/shareProtected/${grp_num}`, {
       method: "get",
       headers: {
         "Content-type": "application/json",
       },
     });
   },
+
   getUserNumPost: (user_num) => {
     //name, id, password
     return fetch(`${CREATE_API}/user_num/${user_num}`, {
@@ -71,7 +71,7 @@ const PostAPI = {
       },
     });
   },
-  postInterest: (body) => {
+  postMyPost: (body) => {
     //main_interest,sub_interest
     return fetch(`${CREATE_API}/addPost`, {
       method: "post",
