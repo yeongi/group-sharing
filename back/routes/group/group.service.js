@@ -59,5 +59,31 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  getGroupSharingByGrpNum: async (userInfo) => {
+    try {
+      const { grp_num } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM group_sharing WHERE grp_num = ?;";
+      const [result] = await conn.query(query,[grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+  startGroupSharing: async (userInfo1,userInfo2) => {
+    try {
+      const { grp_num1,grp_num2 } = userInfo1;
+      const { sharing_start_date,sharing_finish_date } = userInfo2;
+      const conn = await pool.getConnection();
+      const query = "INSERT INTO group_sharing VALUES (?,?,?,?,?) ;";
+      const [result] = await conn.query(query,[grp_num1,grp_num2,sharing_start_date,sharing_finish_date,0]);
+                       await conn.query(query,[grp_num2,grp_num1,sharing_start_date,sharing_finish_date,0]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 };
