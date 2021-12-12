@@ -5,7 +5,7 @@ import classes from "./stylesheet/main.module.css";
 import Body from "../layout/Body";
 
 const Main = () => {
-  const user = useContext(UserCtx);
+  const userCtx = useContext(UserCtx);
 
   return (
     <>
@@ -16,12 +16,12 @@ const Main = () => {
             <Link to="groups">그룹 찾기</Link>
           </div>
           <div className={classes["nav-item"]}>
-            {user.isLoggedIn ? (
+            {userCtx.isLoggedIn ? (
               <h1>내 그룹에서 활동하세요.</h1>
             ) : (
               <h1>로그인을 통해서 그룹에 가입 하세요.</h1>
             )}
-            {user.isLoggedIn ? (
+            {userCtx.isLoggedIn ? (
               <Link to="group">내 그룹 가기</Link>
             ) : (
               <Link to="signUp">로그인 하기</Link>

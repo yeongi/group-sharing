@@ -10,8 +10,18 @@
   background-color: beige;
   justify-content: center;
   flex-direction: row;
+  display: flex;
 }
 
-.group-wrapper article {
-  height: 300px;
+.group-wrapper .result {
+  width: 800px;
+  height: 700px;
+  border: 1px black solid;
+}
+
+.group-wrapper .search {
+  width: 400px;
+  height: 700px;
+  padding: 20px;
+  border: 1px black solid;
 }
