@@ -3,7 +3,7 @@ const CREATE_API = "http://localhost:4000/groups";
 const GrpApi = {
   getGrpList: () => {
     //name, id, password
-    return fetch(`${CREATE_API}/`, {
+    return fetch(`${CREATE_API}/all`, {
       method: "get",
       headers: {
         "Content-type": "application/json",

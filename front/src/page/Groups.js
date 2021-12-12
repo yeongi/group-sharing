@@ -1,14 +1,30 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import classes from "./stylesheet/group.module.css";
 import Header from "../layout/Header";
 import { Button, TextField } from "@mui/material";
+import GrpApi from "../lib/api/Group";
 
 const Groups = () => {
   const [param, setParam] = useState("");
+  const navigator = useNavigate();
 
   const onChangeParamHandler = (e) => {
     setParam(e.target.value);
+  };
+
+  const [grpList, setGrp] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const getList = useCallback(async () => {
+    const result = await GrpApi.getGrpList();
+    const data = await result.json();
+    console.log(data);
+    setGrp(data.data);
+  }, [grpList, isLoading]);
+
+  const searchHandler = () => {
+    getList();
   };
 
   return (
@@ -24,14 +40,29 @@ const Groups = () => {
                 value={param}
                 onChange={onChangeParamHandler}
               />
-              <Button variant="contained" size="large">
+              <Button variant="contained" size="large" onClick={searchHandler}>
                 검색하기
               </Button>
               <hr />
-              <div>그룹 검색 결과</div>
+              {isLoading && <div>그룹 검색 결과 나열</div>}
+              {!isLoading &&
+                grpList.map((g) => {
+                  return (
+                    <div
+                      key={g.grp_num}
+                      onClick={(e) => {
+                        navigator(`${g.grp_num}`);
+                      }}
+                    >
+                      <p>그룹명 : {g.grp_name}</p>
+                      <p>그룹번호 : {g.grp_num}</p>
+                      <p>관심사 번호 : {g.interest_num}</p>
+                      <hr />
+                    </div>
+                  );
+                })}
             </article>
             <article className={classes["result"]}>
-              <p>그룹 검색 햇을 때 게시물</p>
               <Outlet />
             </article>
           </section>

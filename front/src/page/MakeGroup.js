@@ -2,23 +2,28 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import UserCtx from "../store/userContext";
+import GrpApi from "../lib/api/Group";
 
 const MakeGroup = () => {
   const [name, setName] = useState("");
   const [intr, setIntr] = useState("");
 
   const userctx = useContext(UserCtx);
+  const nav = useNavigate();
 
   const postMakeGrp = async (e) => {
     e.preventDefault();
-    const result = await postMakeGrp({
+    const result = await GrpApi.postMyGrp({
       interest_num: intr,
       grp_name: name,
       grp_leader: userctx.user.num,
-      grp_create_date: new Date(),
     });
     const data = await result.json();
     console.log(data);
+    if (data.message === "Success") {
+      alert("그룹 만들기 완료");
+      nav("/groups");
+    }
   };
 
   return (
@@ -45,7 +50,9 @@ const MakeGroup = () => {
           value={intr}
         />
         <br />
-        <Button variant="contained">그룹 추가 하기</Button>
+        <Button variant="contained" type="submit">
+          그룹 추가 하기
+        </Button>
       </form>
     </div>
   );
