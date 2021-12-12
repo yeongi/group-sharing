@@ -59,12 +59,12 @@ module.exports = {
       throw error;
     }
   },
-  getShared: async (grp_num) => {
+  getShared: async (grp_num1,grp_num2) => {
     try {
       const conn = await pool.getConnection();
       const query =
-        "SELECT * FROM post WHERE grp_num IN (SELECT grp_num2 FROM group_sharing WHERE grp_num = ?) AND open_type = 'protected'";
-      const [result] = await conn.query(query, [grp_num]);
+        "SELECT * FROM post WHERE grp_num IN (SELECT grp_num2 FROM group_sharing WHERE grp_num = ?) AND open_type = 'protected' AND post.post_num = ?";
+      const [result] = await conn.query(query, [grp_num1,grp_num2]);
       conn.release();
       return result;
     } catch (error) {

@@ -65,8 +65,8 @@ router.get("/grp_num/:grp_num", async (req, res) => {
 //공유하고 있는 그룹의 protected 게시글 가져오기
 router.get("/shareProtected/:grp_num", async (req, res) => {
   try {
-    const { grp_num } = req.params;
-    const result = await postService.getShared(grp_num);
+    const { grp_num1,grp_num2 } = req.params;
+    const result = await postService.getShared(grp_num1,grp_num2);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
