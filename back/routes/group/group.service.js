@@ -1,6 +1,17 @@
 const pool = require("../../config/dbConfig");
 
 module.exports = {
+  getAllGroups: async () => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM group;";
+      const [result] = await conn.query(query);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
   addGroup: async (userInfo) => {
     try {
       const { interest_num, grp_name, grp_leader, grp_create_date } = userInfo;
