@@ -27,4 +27,28 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//관심사 전부 가져오기
+router.post("/interest", async (req, res) => {
+  try {
+    const result = await UserService.getInterests();
+    console.log(result);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
+//그룹 생성
+router.post("/group", async (req, res) => {
+  try {
+    const result = await UserService.addGroup(req.body);
+
+    console.log(result);
+
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
 module.exports = router;

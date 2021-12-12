@@ -51,4 +51,27 @@ module.exports = {
   },
   updateUser: (userInfo) => {},
   deleteUser: (userInfo) => {},
+  addGroup: async (userInfo) => {
+    try {
+      const { interest_num, grp_name, grp_leader, grp_create_date } = req.body;
+      const conn = await pool.getConnection();
+      const query = "INSERT INTO `group` (interest_num,grp_name,grp_leader,grp_create_date) VALUES (?,?,?,?);";
+      const [result] = await conn.query(query);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getInterests: async () => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM interest;";
+      const [result] = await conn.query(querys);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 };
