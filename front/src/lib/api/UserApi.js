@@ -22,6 +22,15 @@ const UserAPI = {
       body: JSON.stringify(user),
     });
   },
+
+  getMyGrp: (user) => {
+    return fetch(`${CREATE_API}/grp/${user}`, {
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };
 
 export default UserAPI;

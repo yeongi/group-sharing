@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BasicModal from "../layout/BasicModal";
 import PostAPI from "../lib/api/Post";
+import GroupApply from "./form/GroupApply";
 
 const GroupOpen = (props) => {
   const { num } = useParams();
@@ -15,17 +17,23 @@ const GroupOpen = (props) => {
     console.log(data);
     setList(data.data);
     // eslint-disable-next-line
-  }, [openPosts, isLoading]);
+  }, [num, isLoading]);
 
   useEffect(() => {
     getList();
     setLoading(true);
     // eslint-disable-next-line
-  }, [num, openPosts]);
+  }, [getList]);
 
   return (
     <div>
       <h1>그룹 공개 게시물</h1>
+      {isLoading && (
+        <BasicModal btn_name="그룹 가입 신청">
+          <GroupApply grpnum={num} />
+        </BasicModal>
+      )}
+
       <hr />
       {isLoading &&
         openPosts.map((e) => {
