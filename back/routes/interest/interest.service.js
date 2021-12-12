@@ -12,6 +12,18 @@ module.exports = {
       throw error;
     }
   },
+  addInterest: async (userInfo) => {
+    try {
+      const { main_interest,sub_interest } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "INSERT INTO interest (main_interest,sub_interest) VALUES (?,?);";
+      const [result] = await conn.query(query,[main_interest,sub_interest]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
   addInterestUser: async (userInfo) => {
     try {
       const { user_num,interest_num } = userInfo;
