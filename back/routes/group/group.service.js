@@ -124,9 +124,7 @@ module.exports = {
       await conn.query(query, [
         grp_num2,
         grp_num1,
-        sharing_start_date,
-        sharing_finish_date,
-        0,
+        0
       ]);
       conn.release();
       return result;
