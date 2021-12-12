@@ -217,6 +217,7 @@ const Group = (props) => {
             {isPostsLoading && (
               <BasicModal btn_name="게시글 작성">
                 <h1>게시글 작성</h1>
+                <p>{curGrp.grp_name}</p>
                 <hr />
                 <form onSubmit={postMakeHandler}>
                   <label>제목 : </label>
