@@ -31,7 +31,7 @@ router.get("/post_num/:post_num", async (req, res) => {
 router.get("/grp_num/:grp_num", async (req, res) => {
   try {
     //const { grp_num } = req.params;
-    const result = await postService.getPostByPostNum(req.params);
+    const result = await postService.getPostByGrpNum(req.params);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
@@ -43,7 +43,7 @@ router.get("/grp_num/:grp_num", async (req, res) => {
 router.get("/user_num/:user_num", async (req, res) => {
   try {
     //const { user_num } = req.params;
-    const result = await postService.getPostByPostNum(req.params);
+    const result = await postService.getPostByUserNum(req.params);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
