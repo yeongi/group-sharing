@@ -17,7 +17,7 @@ const Groups = () => {
   const [isLoading, setLoading] = useState(false);
 
   const getList = useCallback(async () => {
-    const result = await GrpApi.getGrpList();
+    const result = await GrpApi.getGrpAllList();
     const data = await result.json();
     console.log(data);
     setGrp(data.data);

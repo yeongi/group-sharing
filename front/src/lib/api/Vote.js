@@ -10,7 +10,7 @@ const VoteApi = {
       body: JSON.stringify(grp_num, vote_title, sharing_term, vote_type),
     });
   },
-  getDuringVote: () => {
+  getDuringVote: (grp_num) => {
     return fetch(`${CREATE_API}/duringVote/${grp_num}`, {
       method: "get",
       headers: {
@@ -18,7 +18,7 @@ const VoteApi = {
       },
     });
   },
-  getFinishVote: () => {
+  getFinishVote: (grp_num) => {
     return fetch(`${CREATE_API}/finishVote/${grp_num}`, {
       method: "get",
       headers: {
@@ -44,7 +44,7 @@ const VoteApi = {
       body: JSON.stringify(user_num, vote_num, ox_response),
     });
   },
-  getMyVote: () => {
+  getMyVote: (user_num) => {
     return fetch(`${CREATE_API}/myVote/${user_num}`, {
       method: "get",
       headers: {
