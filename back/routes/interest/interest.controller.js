@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 //관심사 테이블에 관심사 하나 추가하기
-router.post("/addInterest", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     //const { main_interest,sub_interest } = req.body;
     const result = await interestService.addInterest(req.body);
@@ -26,7 +26,7 @@ router.post("/addInterest", async (req, res) => {
 });
 
 //회원의 관심사 전부 가져오기
-router.get("/userNum/:user_num", async (req, res) => {
+router.get("/user/:user_num", async (req, res) => {
   try {
     //const { user_num } = req.params;
     const result = await interestService.getUserInterests(req.params);
@@ -38,7 +38,7 @@ router.get("/userNum/:user_num", async (req, res) => {
 });
 
 //회원의 관심사 등록하기
-router.post("/addInterestUser", async (req, res) => {
+router.post("/user", async (req, res) => {
   try {
     //const { user_num,interest_num } = req.body;
     const result = await interestService.addInterestUser(req.body);

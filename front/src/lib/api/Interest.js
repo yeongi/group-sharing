@@ -1,7 +1,7 @@
 const CREATE_API = "http://localhost:4000/interests";
 
 const InterestAPI = {
-  getGrpList: () => {
+  getInterestList: () => {
     //name, id, password
     return fetch(`${CREATE_API}/`, {
       method: "get",
@@ -11,25 +11,24 @@ const InterestAPI = {
     });
   },
 
-  postMyGrp: (group) => {
-    //interest_num, grp_name, grp_leader, grp_create_date
-    return fetch(`${CREATE_API}/addGroup`, {
-      method: "post",
+  getUserInterest: (user_num) => {
+    //name, id, password
+    return fetch(`${CREATE_API}/user/${user_num}`, {
+      method: "get",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(group),
     });
   },
 
-  postGrpApply: (group) => {
-    //user_num,grp_num,register_date,grade,register_state,nickname,email,main_activity
-    return fetch(`${CREATE_API}/addGroup`, {
+  postInterest: (body) => {
+    //main_interest,sub_interest
+    return fetch(`${CREATE_API}/addInterest`, {
       method: "post",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(group),
+      body: JSON.stringify(body),
     });
   },
 };
