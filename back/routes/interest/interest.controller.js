@@ -14,10 +14,10 @@ router.get("/", async (req, res) => {
 });
 
 //관심사 테이블에 관심사 하나 추가하기
-router.get("/addInterest/main_interest/:main_interest/sub_interest/:sub_interest", async (req, res) => {
+router.post("/addInterest", async (req, res) => {
   try {
-    //const { main_interest,sub_interest } = req.params;
-    const result = await interestService.addInterest(req.params);
+    //const { main_interest,sub_interest } = req.body;
+    const result = await interestService.addInterest(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
@@ -38,10 +38,10 @@ router.get("/userNum/:user_num", async (req, res) => {
 });
 
 //회원의 관심사 등록하기
-router.get("/addInterestUser/userNum/:user_num/interestNum/:interest_num", async (req, res) => {
+router.post("/addInterestUser", async (req, res) => {
   try {
-    //const { user_num,interest_num } = req.params;
-    const result = await interestService.addInterestUser(req.params);
+    //const { user_num,interest_num } = req.body;
+    const result = await interestService.addInterestUser(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
