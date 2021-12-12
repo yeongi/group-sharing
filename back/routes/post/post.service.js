@@ -12,6 +12,17 @@ module.exports = {
       throw error;
     }
   },
+  getAllPublicPost: async () => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM post WHERE open_type = 'public';";
+      const [result] = await conn.query(query);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
   getPostByPostNum: async (userInfo) => {
     try {
       const { post_num } = userInfo;
@@ -36,12 +47,24 @@ module.exports = {
       throw error;
     }
   },
-  getPostByUserNum: async (userInfo) => {
+  getShared: async (grp_num) => {
     try {
-      const { user_num } = userInfo;
       const conn = await pool.getConnection();
-      const query = "SELECT * FROM post WHERE user_num = ?;";
-      const [result] = await conn.query(query,[user_num]);
+      const query = "SELECT * FROM post WHERE grp_num IN (SELECT grp_num2 FROM group_sharing WHERE grp_num = ?) AND open_type = 'protected'";
+      const [result] = await conn.query(query,[grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getPostByUserNumAndGroupNum: async (userInfo) => {
+    try {
+      const { user_num,group_num } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM post WHERE user_num = ? AND group_num = ?;";
+      const [result] = await conn.query(query,[user_num,group_num]);
       conn.release();
       return result;
     } catch (error) {
