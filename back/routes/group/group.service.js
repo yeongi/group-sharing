@@ -47,5 +47,17 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  getGroupSharingByGrpNum: async (userInfo) => {
+    try {
+      const { grp_num } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM group_sharing WHERE grp_num = ?;";
+      const [result] = await conn.query(query,[grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 };

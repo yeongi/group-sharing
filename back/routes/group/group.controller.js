@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 router.post("/addGroup", async (req, res) => {
   try {
      //const { interest_num, grp_name, grp_leader, grp_create_date } = req.body;
-    const result = await UserService.addGroup(req.body);
+    const result = await groupService.addGroup(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
@@ -30,7 +30,7 @@ router.post("/addGroup", async (req, res) => {
 router.post("/joinGroup", async (req, res) => {
   try {
     //const { user_num,grp_num,register_date,grade,register_state,nickname,email,main_activity  } = req.body;
-    const result = await UserService.joinGroup(req.body);
+    const result = await groupService.joinGroup(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
@@ -42,7 +42,19 @@ router.post("/joinGroup", async (req, res) => {
 router.get("/change/user_num/:user_num/grp_num/:grp_num/register_state/:register_state", async (req, res) => {
   try {
     //const { user_num, grp_num, register_state } = req.params;
-    const result = await UserService.changeState(req.params);
+    const result = await groupService.changeState(req.params);
+    console.log(result);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
+//그룹 번호로 공유그룹들 정보 확인하기
+router.get("/groupSharing/grp_num/:grp_num", async (req, res) => {
+  try {
+    //const { grp_num } = req.params;
+    const result = await groupService.getGroupSharingByGrpNum(req.params);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
