@@ -35,5 +35,17 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  changeState: async (userInfo) => {
+    try {
+      const { user_num, grp_num, register_state } = userInfo;
+      const conn = await pool.getConnection();
+      const query = "UPDATE group_user SET register_state = ? WHERE user_num = ? AND grp_num = ? ;";
+      const [result] = await conn.query(query,[register_state,user_num, grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 };

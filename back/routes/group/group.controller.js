@@ -38,4 +38,16 @@ router.post("/joinGroup", async (req, res) => {
   }
 });
 
+//회원_그룹의 가입상태정보 변경하기
+router.get("/change/user_num/:user_num/grp_num/:grp_num/register_state/:register_state", async (req, res) => {
+  try {
+    //const { user_num, grp_num, register_state } = req.params;
+    const result = await UserService.changeState(req.params);
+    console.log(result);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
 module.exports = router;
