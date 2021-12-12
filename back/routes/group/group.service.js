@@ -17,12 +17,11 @@ module.exports = {
       const { interest_num, grp_name, grp_leader, grp_create_date } = userInfo;
       const conn = await pool.getConnection();
       const query =
-        "INSERT INTO `group` (interest_num,grp_name,grp_leader,grp_create_date) VALUES (?,?,?,?);";
+        "INSERT INTO `group` (interest_num,grp_name,grp_leader,grp_create_date) VALUES (?,?,?,now());";
       const [result] = await conn.query(query, [
         interest_num,
         grp_name,
         grp_leader,
-        grp_create_date,
       ]);
       conn.release();
       return result;
@@ -30,6 +29,7 @@ module.exports = {
       throw error;
     }
   },
+
   joinGroup: async (userInfo) => {
     try {
       const {
