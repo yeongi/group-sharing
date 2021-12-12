@@ -4,10 +4,9 @@ const UserService = require("../user/user.service");
 const groupService = require("./group.service");
 
 //그룹 전부 가져오기
-router.get("/", async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
-    const result = await groupService.getAllGroups();//파라미터 필요 없음
-    console.log(result);
+    const result = await groupService.getAllGroups(); //파라미터 필요 없음
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error });
@@ -17,7 +16,7 @@ router.get("/", async (req, res) => {
 //그룹 생성
 router.post("/addGroup", async (req, res) => {
   try {
-     //const { interest_num, grp_name, grp_leader, grp_create_date } = req.body;
+    //const { interest_num, grp_name, grp_leader, grp_create_date } = req.body;
     const result = await groupService.addGroup(req.body);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
@@ -39,16 +38,19 @@ router.post("/joinGroup", async (req, res) => {
 });
 
 //회원_그룹의 가입상태정보 변경하기
-router.get("/change/user_num/:user_num/grp_num/:grp_num/register_state/:register_state", async (req, res) => {
-  try {
-    //const { user_num, grp_num, register_state } = req.params;
-    const result = await groupService.changeState(req.params);
-    console.log(result);
-    res.status(200).json({ status: 200, data: result, message: "Success" });
-  } catch (error) {
-    return res.status(500).json({ status: 500, message: error });
+router.get(
+  "/change/user_num/:user_num/grp_num/:grp_num/register_state/:register_state",
+  async (req, res) => {
+    try {
+      //const { user_num, grp_num, register_state } = req.params;
+      const result = await groupService.changeState(req.params);
+      console.log(result);
+      res.status(200).json({ status: 200, data: result, message: "Success" });
+    } catch (error) {
+      return res.status(500).json({ status: 500, message: error });
+    }
   }
-});
+);
 
 //그룹 번호로 공유그룹들 정보 확인하기
 router.get("/groupSharing/grp_num/:grp_num", async (req, res) => {
