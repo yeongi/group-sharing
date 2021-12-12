@@ -50,5 +50,17 @@ module.exports = {
     }
   },
   updateUser: (userInfo) => {},
-  deleteUser: (userInfo) => {}
+  deleteUser: (userInfo) => {},
+  getGroupByUserNum: async (user_num) => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "select * from `group_user` where user_num = ?;";
+      const [result] = await conn.query(query, [user_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 };
