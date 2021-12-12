@@ -46,7 +46,6 @@ module.exports = {
       const {
         user_num,
         grp_num,
-        register_date,
         grade,
         register_state,
         nickname,
@@ -54,11 +53,10 @@ module.exports = {
         main_activity,
       } = userInfo;
       const conn = await pool.getConnection();
-      const query = "INSERT INTO group_user VALUES (?,?,?,?,?,?,?,?);";
+      const query = "INSERT INTO group_user VALUES (?,?,now(),?,?,?,?,?);";
       const [result] = await conn.query(query, [
         user_num,
         grp_num,
-        register_date,
         grade,
         register_state,
         nickname,
