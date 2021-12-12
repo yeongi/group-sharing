@@ -12,6 +12,17 @@ module.exports = {
       throw error;
     }
   },
+  getGroupWithInterestByGroupNum: async (grp_num) => {
+    try {
+      const conn = await pool.getConnection();
+      const query = "SELECT * FROM `group` INNER JOIN interest ON `group`.interest_num = interest.interest_num WHERE `group`.grp_num = ?;";
+      const [result] = await conn.query(query,[grp_num]);
+      conn.release();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
   addGroup: async (userInfo) => {
     try {
       const { interest_num, grp_name, grp_leader, grp_create_date } = userInfo;

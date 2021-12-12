@@ -13,6 +13,17 @@ router.get("/all", async (req, res) => {
   }
 });
 
+//그룹번호로 그룹관심사를 조인해서 가져오기
+router.get("/withInterest/group_num/:group_num", async (req, res) => {
+  try {
+    const { group_num } = req.params;
+    const result = await groupService.getGroupWithInterestByGroupNum(group_num);
+    res.status(200).json({ status: 200, data: result, message: "Success" });
+  } catch (error) {
+    return res.status(500).json({ status: 500, message: error });
+  }
+});
+
 //그룹 생성
 router.post("/addGroup", async (req, res) => {
   try {
