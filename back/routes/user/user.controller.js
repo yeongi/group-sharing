@@ -31,11 +31,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//유저번호로 내 그룹 가져오기
+//회원 번호로 그룹 정보 가져오기
 router.get("/grp/:user_num", async (req, res) => {
-  const { user_num } = req.params;
   try {
-    //const { user_num } = req.body;
+    const { user_num } = req.params;
     const result = await UserService.getGroupByUserNum(user_num);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
