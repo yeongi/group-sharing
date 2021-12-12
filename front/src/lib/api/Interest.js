@@ -23,7 +23,7 @@ const InterestAPI = {
 
   postInterest: (body) => {
     //main_interest,sub_interest
-    return fetch(`${CREATE_API}/addInterest`, {
+    return fetch(`${CREATE_API}/user`, {
       method: "post",
       headers: {
         "Content-type": "application/json",

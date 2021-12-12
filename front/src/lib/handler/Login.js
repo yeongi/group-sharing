@@ -1,5 +1,3 @@
-import { logOutPost } from "../axios";
-
 const LogHandler = {
   logOut: async (userCtx) => {
     userCtx.onLogOut();

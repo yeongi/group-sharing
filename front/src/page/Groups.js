@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import classes from "./stylesheet/group.module.css";
+import Header from "../layout/Header";
+import { Button, TextField } from "@mui/material";
 
 const Groups = () => {
   const [param, setParam] = useState("");
@@ -10,29 +12,32 @@ const Groups = () => {
   };
 
   return (
-    <div className={classes["wrapper"]}>
-      <h1>그룹 찾기 페이지</h1>
-      {
+    <>
+      <Header message="그룹 찾기" />
+      <div className={classes["wrapper"]}>
         <>
           <section className={classes["group-wrapper"]}>
-            <article>
-              <h1>그룹 검색하기</h1>
-              <p>대충 그룹 나오는 창</p>
-              <input
+            <article className={classes["search"]}>
+              <TextField
                 type="text"
                 placeholder="검색어를 입력하세요."
                 value={param}
                 onChange={onChangeParamHandler}
               />
-              <Link to={`s:${param}`}>검색하기</Link>
+              <Button variant="contained" size="large">
+                검색하기
+              </Button>
+              <hr />
+              <div>그룹 검색 결과</div>
             </article>
-            <article>
+            <article className={classes["result"]}>
+              <p>그룹 검색 햇을 때 게시물</p>
               <Outlet />
             </article>
           </section>
         </>
-      }
-    </div>
+      </div>
+    </>
   );
 };
 

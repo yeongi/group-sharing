@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import SignUp from "./page/SignUp";
 import SignIn from "./page/SignIn";
 import Groups from "./page/Groups";
+import MakeGroup from "./page/MakeGroup";
 import Main from "./page/Main";
 import SearchGroup from "./page/SearchGroup";
 import SearchResult from "./page/SearchResult";
@@ -12,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="groups" element={<SearchGroup />}>
-        <Route path="s:num" element={<SearchResult />} />
+        <Route path="make" element={<MakeGroup />} />
       </Route>
       <Route path="group" element={<Group />} />
       <Route path="signUp" element={<SignUp />} />

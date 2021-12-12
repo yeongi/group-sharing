@@ -2,25 +2,35 @@ import { Button, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Body from "../layout/Body";
-import { loginPost, logOutPost } from "../lib/axios";
+import UserAPI from "../lib/api/UserApi";
 import UserCtx from "../store/userContext";
 import classes from "./stylesheet/page.module.css";
 
 const SignUp = () => {
   const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
 
-  const user = useContext(UserCtx);
+  const userCtx = useContext(UserCtx);
   const navigate = useNavigate();
 
-  const idChangeHandler = (e) => {
-    setId(e.target.value);
-  };
-
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    user.onLogIn();
-    navigate("/");
-    loginPost(id);
+    const result = await UserAPI.logIn({
+      id: id,
+      password: pw,
+    });
+    const data = await result.json();
+    console.log("결과", data);
+    if (data.message === "Fail") {
+      alert("로그인 실패");
+    } else {
+      userCtx.onLogIn({
+        isLoggedIn: "true",
+        num: data.data.user_num,
+        name: data.data.name,
+      });
+      navigate("/");
+    }
   };
 
   return (
@@ -33,8 +43,11 @@ const SignUp = () => {
               <TextField
                 required
                 label="ID"
+                value={id}
                 placeholder="아이디를 입력하세요."
-                onChange={idChangeHandler}
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
               />
               <br />
             </div>
@@ -43,7 +56,12 @@ const SignUp = () => {
               <TextField
                 required
                 label="PW"
+                value={pw}
+                type="password"
                 placeholder="비밀번호를 입력하세요."
+                onChange={(e) => {
+                  setPw(e.target.value);
+                }}
               />
               <br />
             </div>

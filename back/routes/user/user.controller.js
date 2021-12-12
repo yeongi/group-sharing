@@ -1,11 +1,14 @@
 var express = require("express");
 var router = express.Router();
 const UserService = require("./user.service");
+const interestService = require("../interest/interest.service");
 
 //회원가입
 router.post("/signUp", async (req, res) => {
   try {
+    //const { name, id, password, user_num, interest_num } = req.body;
     const result = await UserService.insertUser(req.body);
+    result = await interestService.addInterestUser(req.body);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
     return res.status(500).json({ status: 500, message: error });

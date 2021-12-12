@@ -2,19 +2,17 @@ import { Avatar, Button } from "@mui/material";
 import classes from "../page/stylesheet/main.module.css";
 import logo from "../asset/logo.png";
 import UserCtx from "../store/userContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LogHandler from "../lib/handler/Login";
 
 const MainHeader = (props) => {
-  const user = useContext(UserCtx);
+  const userCtx = useContext(UserCtx);
 
   const logOutHandler = (e) => {
     e.preventDefault();
-    const result = LogHandler.logOut(user);
-    console.log(result);
+    userCtx.onLogOut();
   };
-
+  console.log(userCtx.isLoggedIn);
   const navigate = useNavigate();
 
   return (
@@ -31,7 +29,7 @@ const MainHeader = (props) => {
         />
         <h1>{props.message}</h1>
         <div>
-          {!user.isLoggedIn && (
+          {!userCtx.isLoggedIn && (
             <>
               <Button
                 onClick={(e) => {
@@ -53,7 +51,7 @@ const MainHeader = (props) => {
               </Button>
             </>
           )}
-          {user.isLoggedIn && (
+          {userCtx.isLoggedIn && (
             <>
               <Button
                 variant="contained"
