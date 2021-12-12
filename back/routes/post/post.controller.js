@@ -63,7 +63,7 @@ router.get("/grp_num/:grp_num", async (req, res) => {
 });
 
 //공유하고 있는 그룹의 protected 게시글 가져오기
-router.get("/grp_num/:grp_num", async (req, res) => {
+router.get("/shareProtected/:grp_num", async (req, res) => {
   try {
     const { grp_num } = req.params;
     const result = await postService.getShared(grp_num);
@@ -77,8 +77,8 @@ router.get("/grp_num/:grp_num", async (req, res) => {
 //회원번호로 글 가져오기
 router.get("/user_num/:user_num", async (req, res) => {
   try {
-    //const { user_num } = req.params;
-    const result = await postService.getPostByUserNum(req.params);
+    const { user_num } = req.params;
+    const result = await postService.getPostByUserNum(user_num);
     console.log(result);
     res.status(200).json({ status: 200, data: result, message: "Success" });
   } catch (error) {
@@ -87,7 +87,7 @@ router.get("/user_num/:user_num", async (req, res) => {
 });
 
 //회원번호와 그룹번호로 해당 그룹에 대한 나의 게시글 조회
-router.get("/user_num/:user_num/group_num/:group_num", async (req, res) => {
+router.get("/user_num/:user_num/group_num/:grp_num", async (req, res) => {
   try {
     //const { user_num,group_num } = req.params;
     const result = await postService.getPostByUserNumAndGroupNum(req.params);
