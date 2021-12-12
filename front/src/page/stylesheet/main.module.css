@@ -67,3 +67,13 @@
   width: 600px;
   padding: 10px;
 }
+
+.post-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.post-nav p {
+  padding-left: 30px;
+  font-size: 20px;
+}

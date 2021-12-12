@@ -15,8 +15,9 @@ module.exports = {
   getGroupWithInterestByGroupNum: async (grp_num) => {
     try {
       const conn = await pool.getConnection();
-      const query = "SELECT * FROM `group` INNER JOIN interest ON `group`.interest_num = interest.interest_num WHERE `group`.grp_num = ?;";
-      const [result] = await conn.query(query,[grp_num]);
+      const query =
+        "SELECT * FROM `group` INNER JOIN interest ON `group`.interest_num = interest.interest_num WHERE `group`.grp_num = ?;";
+      const [result] = await conn.query(query, [grp_num]);
       conn.release();
       return result;
     } catch (error) {
@@ -102,7 +103,8 @@ module.exports = {
     try {
       const { grp_num } = userInfo;
       const conn = await pool.getConnection();
-      const query = "SELECT * FROM (SELECT * FROM group_sharing WHERE grp_num = ? ) t INNER JOIN `group` ON `group`.grp_num = t.grp_num2;";
+      const query =
+        "SELECT * FROM (SELECT * FROM group_sharing WHERE grp_num = ? ) t INNER JOIN `group` ON `group`.grp_num = t.grp_num2;";
       const [result] = await conn.query(query, [grp_num]);
       conn.release();
       return result;
@@ -110,27 +112,17 @@ module.exports = {
       throw error;
     }
   },
-  startGroupSharing: async (userInfo1, userInfo2) => {
+  startGroupSharing: async (userInfo1) => {
     try {
       const { grp_num1, grp_num2 } = userInfo1;
-      const { sharing_start_date, sharing_finish_date } = userInfo2;
       const conn = await pool.getConnection();
       const query = "INSERT INTO group_sharing VALUES (?,?,now(),null,?) ;";
-      const [result] = await conn.query(query, [
-        grp_num1,
-        grp_num2,
-        0
-      ]);
-      await conn.query(query, [
-        grp_num2,
-        grp_num1,
-        sharing_start_date,
-        sharing_finish_date,
-        0,
-      ]);
+      const [result] = await conn.query(query, [grp_num1, grp_num2, 0]);
+      await conn.query(query, [grp_num2, grp_num1, 0]);
       conn.release();
       return result;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   },

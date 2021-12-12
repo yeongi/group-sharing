@@ -73,7 +73,7 @@ const GrpApi = {
     });
   },
   postStartSharing: (group) => {
-    return fetch(`${CREATE_API}startGroupSharing`, {
+    return fetch(`${CREATE_API}/startGroupSharing`, {
       method: "post",
       headers: {
         "Content-type": "application/json",
