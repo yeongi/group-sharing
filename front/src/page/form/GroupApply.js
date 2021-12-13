@@ -54,8 +54,7 @@ const GroupApply = (props) => {
             required
             label="email"
             value={email}
-            type="password"
-            placeholder="비밀번호를 입력하세요."
+            placeholder="이메일을 입력하세요."
             onChange={(e) => {
               setEmail(e.target.value);
             }}

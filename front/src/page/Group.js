@@ -35,6 +35,7 @@ const Group = (props) => {
     setShareLoading(false);
     const result = await UserAPI.getMyGrp(userctx.user.num);
     const data = await result.json();
+    console.log(data);
     setInfo(data.data);
     // eslint-disable-next-line
   }, [isLoading, shareLoading, myGropInfo]);
@@ -246,7 +247,7 @@ const Group = (props) => {
                       value={type}
                       label="유형"
                       onChange={(e) => {
-                        setShareGrp(e.target.value);
+                        setType(e.target.value);
                       }}
                     >
                       <MenuItem value={"public"}>공개게시물</MenuItem>

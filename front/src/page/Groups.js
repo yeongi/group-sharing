@@ -9,10 +9,6 @@ const Groups = () => {
   const [param, setParam] = useState("");
   const navigator = useNavigate();
 
-  const onChangeParamHandler = (e) => {
-    setParam(e.target.value);
-  };
-
   const [grpList, setGrp] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -25,6 +21,10 @@ const Groups = () => {
 
   const searchHandler = () => {
     getList();
+  };
+
+  const onChangeParamHandler = (e) => {
+    setParam(e.target.value);
   };
 
   return (
